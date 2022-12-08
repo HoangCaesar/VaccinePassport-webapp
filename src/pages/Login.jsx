@@ -89,10 +89,9 @@ const Login = () => {
                     </Typography>
                     <FormControl fullWidth>
                         <TextField
-                            placeholder='user: admin| password: @$aDmIn$@'
                             label="Username"
                             variant="outlined"
-                            value={username}
+                            value={username || 'admin'}
                             onChange={(e) => setUsername(e.target.value)}
                             error={usernameErr}
                         />
@@ -102,7 +101,7 @@ const Login = () => {
                             label="Password"
                             type="password"
                             variant="outlined"
-                            value={password}
+                            value={password || '@$aDmIn$@'}
                             onChange={(e) => setPassword(e.target.value)}
                             error={passwordErr}
                         />
