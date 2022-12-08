@@ -1,6 +1,6 @@
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, FormControl, TextField, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authApi from '../api/authApi';
 import bgImage from '../assets/img/login-bg.png';
@@ -9,11 +9,12 @@ import { isAuthenticated } from '../handlers';
 const Login = () => {
     const navigate = useNavigate();
     const [loginErr, setLoginErr] = useState();
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState('admin');
     const [usernameErr, setUsernameErr] = useState(false);
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('@$aDmIn$@');
     const [passwordErr, setPasswordErr] = useState(false);
     const [onSubmit, setOnSubmit] = useState(false);
+
 
     useEffect(() => {
         const checkToken = (async () => {
@@ -48,8 +49,8 @@ const Login = () => {
             navigate('/');
         } catch (err) {
             console.log(err.response);
-            if(err.response.status === 401) {
-              setLoginErr(err.response.data)
+            if (err.response.status === 401) {
+                setLoginErr(err.response.data)
             }
             setOnSubmit(false);
         }
@@ -91,7 +92,7 @@ const Login = () => {
                         <TextField
                             label="Username"
                             variant="outlined"
-                            value={username || 'admin'}
+                            value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             error={usernameErr}
                         />
@@ -101,7 +102,7 @@ const Login = () => {
                             label="Password"
                             type="password"
                             variant="outlined"
-                            value={password || '@$aDmIn$@'}
+                            value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             error={passwordErr}
                         />
